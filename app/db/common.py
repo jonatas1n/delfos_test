@@ -10,7 +10,6 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", "postgres")
 DB_SOURCE_NAME = os.getenv("DB_SOURCE_NAME", os.getenv("DB_NAME", "source"))
 DB_TARGET_NAME = os.getenv("DB_TARGET_NAME", "target")
 
-# Constantes de conexão
 CONNECTION_ATTEMPTS_DEFAULT = int(os.getenv("DB_CONN_ATTEMPTS", "30"))
 CONNECTION_DELAY_S_DEFAULT = float(os.getenv("DB_CONN_DELAY_S", "1.0"))
 

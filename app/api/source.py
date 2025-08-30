@@ -13,10 +13,9 @@ from db.source_setup import SourceData
 router = APIRouter(prefix="/source", tags=["source"])
 
 DEFAULT_VARIABLES = ["wind_speed", "power", "ambient_temperature"]
-VAR_DB_FIELD_MAP = {
+VARIABLE_TO_COLUMN_MAP = {
     "wind_speed": SourceData.wind_speed,
     "power": SourceData.power,
-    # Mapear nome natural para coluna do banco (ambient_temperature)
     "ambient_temperature": SourceData.ambient_temperature.label("ambient_temperature"),
 }
 
@@ -58,10 +57,9 @@ def get_source_data(
     if params.start >= params.end:
         raise HTTPException(status_code=400, detail="start must be before end")
 
-    # Seleciona somente colunas solicitadas
     selected_cols = [SourceData.timestamp]
     for var in params.variables:
-        selected_cols.append(VAR_DB_FIELD_MAP[var])
+        selected_cols.append(VARIABLE_TO_COLUMN_MAP[var])
 
     stmt = (
         select(*selected_cols)
@@ -72,7 +70,7 @@ def get_source_data(
 
     rows = session.execute(stmt).all()
     results: List[DataQueryResponse] = []
-    for row in rows:  # row: (datetime, float, float, float)
+    for row in rows:
         item = {"timestamp": row[0]}
         for idx, var in enumerate(params.variables, start=1):
             item[var] = row[idx]

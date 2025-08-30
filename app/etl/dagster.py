@@ -25,7 +25,6 @@ from .etl_daily import (
 
 @resource
 def source_engine():
-    """Recurso: engine do banco de dados Fonte (SQLAlchemy)."""
     url = common.build_db_url(common.DB_SOURCE_NAME)
     common.wait_for_connection(url)
     engine = create_engine(url, pool_pre_ping=True)
@@ -37,7 +36,6 @@ def source_engine():
 
 @resource
 def target_engine():
-    """Recurso: engine do banco de dados Alvo (SQLAlchemy)."""
     url = common.build_db_url(common.DB_TARGET_NAME)
     common.wait_for_connection(url)
     engine = create_engine(url, pool_pre_ping=True)
@@ -55,7 +53,6 @@ daily_partitions = DailyPartitionsDefinition(start_date="2024-01-01")
     required_resource_keys={"source_engine", "target_engine"},
 )
 def etl_daily_asset(context, source_engine, target_engine):
-    """Asset particionado diário que executa o ETL do dia."""
     date_str = context.partition_key
     base_url = os.getenv("API_BASE_URL", DEFAULT_BASE_URL)
 

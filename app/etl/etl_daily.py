@@ -15,7 +15,6 @@ from db.target_setup import Signal, Measurement, create_target_schema
 FALLBACK_URL = "http://localhost:8000"
 DEFAULT_BASE_URL = os.getenv("API_BASE_URL", FALLBACK_URL)
 
-# Constantes de agregação e nomes de variáveis
 RESAMPLE_RULE = "10min"
 REQUEST_VARS = ["wind_speed", "power"]
 AGG_FUNCS = ["mean", "min", "max", "std"]
@@ -76,7 +75,6 @@ def fetch_source_data(base_url: str, start: datetime, end: datetime) -> pd.DataF
 
 def aggregate_10min(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
-        # Cria DataFrame vazio com as colunas esperadas quando não há dados
         cols = [
             f"{var}_{agg}_10m"
             for var in ["wind_speed", "power"]
@@ -112,7 +110,6 @@ def write_target(engine, agg_df: pd.DataFrame, start: datetime, end: datetime) -
         ]
         name_to_id = ensure_signals(session, signal_names)
 
-        # Idempotente: remove linhas existentes na janela para esses sinais
         signal_ids = list(name_to_id.values())
         session.execute(
             delete(Measurement)
@@ -122,7 +119,6 @@ def write_target(engine, agg_df: pd.DataFrame, start: datetime, end: datetime) -
         )
         session.commit()
 
-        # Insere por sinal em lotes usando pandas para eficiência
         inserted = 0
         for signal_name, signal_id in name_to_id.items():
             if signal_name not in agg_df.columns:
@@ -132,7 +128,6 @@ def write_target(engine, agg_df: pd.DataFrame, start: datetime, end: datetime) -
             if sub.empty:
                 continue
 
-            # Converte índice de timestamp para coluna
             sub = sub.reset_index()
             sub["signal_id"] = signal_id
 
