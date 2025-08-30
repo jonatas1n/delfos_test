@@ -14,7 +14,11 @@ def test_pipeline_completo_data_atual():
 def test_consistencia_dados_fonte_alvo():
     engine_fonte = DatabaseHelper.get_engine(TestConfig.FONTE_DB_URL)
     with engine_fonte.connect() as conn:
-        test_date = conn.execute(text("SELECT DATE(MIN(timestamp)) FROM data")).scalar().strftime("%Y-%m-%d")
+        test_date = (
+            conn.execute(text("SELECT DATE(MIN(timestamp)) FROM data"))
+            .scalar()
+            .strftime("%Y-%m-%d")
+        )
 
     run_etl_for_date(test_date)
 
@@ -39,5 +43,3 @@ def test_consistencia_dados_fonte_alvo():
         ).fetchone()
 
     assert alvo.total > 0
-
-

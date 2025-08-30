@@ -88,6 +88,7 @@ def run_etl_for_date(date_str: str) -> subprocess.CompletedProcess:
         timeout=120,
     )
 
+
 @pytest.fixture(scope="session", autouse=True)
 def setup_environment():
     print("\n[SETUP] Iniciando ambiente de teste...")
@@ -140,5 +141,3 @@ def setup_environment():
     print("\n[TEARDOWN] Limpando ambiente...")
     if not TestConfig.RUN_IN_CONTAINER:
         subprocess.run(["docker", "compose", "down", "-v"], capture_output=True)
-
-

@@ -38,7 +38,7 @@ def test_estrutura_tabelas_alvo():
 def test_dados_auxiliares_signals():
     engine = DatabaseHelper.get_engine(TestConfig.ALVO_DB_URL)
     with engine.connect() as conn:
-        rows = conn.execute(text("SELECT id, name FROM signal ORDER BY name")).fetchall()
+        rows = conn.execute(
+            text("SELECT id, name FROM signal ORDER BY name")
+        ).fetchall()
         assert len(rows) > 0
-
-

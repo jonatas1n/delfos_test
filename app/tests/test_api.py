@@ -20,7 +20,12 @@ def test_rota_data_basica():
 
     resp = httpx.get(
         f"{TestConfig.API_BASE_URL}/source/data",
-        params=[("start", start), ("end", end), ("variables", "wind_speed"), ("variables", "power")],
+        params=[
+            ("start", start),
+            ("end", end),
+            ("variables", "wind_speed"),
+            ("variables", "power"),
+        ],
         timeout=TestConfig.API_TIMEOUT,
     )
     assert resp.status_code == 200
@@ -37,11 +42,14 @@ def test_filtro_variaveis():
 
     resp = httpx.get(
         f"{TestConfig.API_BASE_URL}/source/data",
-        params=[("start", start), ("end", end), ("variables", "wind_speed"), ("variables", "power")],
+        params=[
+            ("start", start),
+            ("end", end),
+            ("variables", "wind_speed"),
+            ("variables", "power"),
+        ],
         timeout=TestConfig.API_TIMEOUT,
     )
     assert resp.status_code == 200
     data = resp.json()
     assert len(data) > 0
-
-

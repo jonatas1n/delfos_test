@@ -35,10 +35,10 @@ def test_estrutura_tabela_data():
             )
         ).fetchall()
         names = {c[0] for c in cols}
-        assert 'timestamp' in names
-        assert 'wind_speed' in names
-        assert 'power' in names
-        assert 'ambient_temperature' in names
+        assert "timestamp" in names
+        assert "wind_speed" in names
+        assert "power" in names
+        assert "ambient_temperature" in names
 
 
 def test_frequencia_minutal():
@@ -60,5 +60,3 @@ def test_frequencia_minutal():
             )
         ).fetchone()
         assert 50 <= row.avg_interval <= 70
-
-

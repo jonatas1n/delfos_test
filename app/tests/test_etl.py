@@ -6,7 +6,11 @@ from .conftest import DatabaseHelper, TestConfig, run_etl_for_date
 def test_etl_execucao_basica():
     engine = DatabaseHelper.get_engine(TestConfig.FONTE_DB_URL)
     with engine.connect() as conn:
-        test_date = conn.execute(text("SELECT DATE(MIN(timestamp)) FROM data")).scalar().strftime("%Y-%m-%d")
+        test_date = (
+            conn.execute(text("SELECT DATE(MIN(timestamp)) FROM data"))
+            .scalar()
+            .strftime("%Y-%m-%d")
+        )
 
     result = run_etl_for_date(test_date)
 
@@ -16,7 +20,11 @@ def test_etl_execucao_basica():
 def test_etl_agregacoes():
     engine_fonte = DatabaseHelper.get_engine(TestConfig.FONTE_DB_URL)
     with engine_fonte.connect() as conn:
-        test_date = conn.execute(text("SELECT DATE(MIN(timestamp)) FROM data")).scalar().strftime("%Y-%m-%d")
+        test_date = (
+            conn.execute(text("SELECT DATE(MIN(timestamp)) FROM data"))
+            .scalar()
+            .strftime("%Y-%m-%d")
+        )
 
     run_etl_for_date(test_date)
 
@@ -38,5 +46,3 @@ def test_etl_agregacoes():
         if rows:
             for row in rows:
                 assert row.records_per_hour > 0
-
-
