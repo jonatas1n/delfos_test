@@ -1,6 +1,6 @@
 # Pipeline ETL para Processamento de Dados
 
-Este projeto implementa um pipeline ETL (Extract, Transform, Load) para processamento de dados de turbinas eólicas, desenvolvido como parte do teste técnico da Delfos.
+Implementação um pipeline ETL (Extract, Transform, Load) para processamento de dados de turbinas eólicas, desenvolvido como parte do teste técnico da Delfos.
 
 ## Como executar (etapas)
 1. Subir serviços e instalar dependências:
