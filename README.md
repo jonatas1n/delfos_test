@@ -40,3 +40,6 @@ Etapas executadas:
   - db/ (DB setup/util)
   - etl/ (ETL e orquestração Dagster)
 - Makefile
+
+## Observação
+Este projeto foi desenvolvido por Jônatas Gomes Barbosa da Silva, utilizando ferramentas de IA como suporte ao desenvolvimento, mantendo a autoria intelectual e implementação técnica.

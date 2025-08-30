@@ -2,7 +2,7 @@ SHELL := /bin/zsh
 
 PROJECT_ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
-.PHONY: up down rebuild logs ps psql clean initdb etl etl_dagster run_all
+.PHONY: up down rebuild logs ps psql clean initdb etl etl_dagster run_all test lint
 
 # Sobe os serviços (constrói imagens se necessário) em background
 up:
@@ -50,6 +50,10 @@ etl_dagster:
 # Executa o fluxo completo de demonstração via script shell
 all:
 	./run_all.sh
+
+# Executa testes com pytest dentro do container da API
+test:
+	docker compose -f $(PROJECT_ROOT)/docker-compose.yml exec -e RUN_IN_CONTAINER=1 api pytest -q
 
 lint:
 	docker compose -f $(PROJECT_ROOT)/docker-compose.yml exec api black .
