@@ -1,8 +1,6 @@
-# Delfos Teste - Postgres + FastAPI via Docker Compose
+# Pipeline ETL para Processamento de Dados
 
-Projeto de teste técnico da Delfos
-
-Esse projeto implementa o teste técnico que consiste na implementação de um pipeline de ETL, com dois bancos de dados, o script ETL (implementado com o Dagster).
+Este projeto implementa um pipeline ETL (Extract, Transform, Load) para processamento de dados de turbinas eólicas, desenvolvido como parte do teste técnico da Delfos.
 
 ## Como executar (etapas)
 1. Subir serviços e instalar dependências:
@@ -30,16 +28,6 @@ Etapas executadas:
 - Inicializa bancos e popula dados de exemplo (source/target)
 - Executa ETL para o dia atual (UTC)
 - Mostra logs da API
-
-## Estrutura
-- docker-compose.yml
-- run_all.sh
-- app/
-  - Dockerfile, requirements.txt, main.py
-  - api/ (rotas REST)
-  - db/ (DB setup/util)
-  - etl/ (ETL e orquestração Dagster)
-- Makefile
 
 ## Observação
 Este projeto foi desenvolvido por Jônatas Gomes Barbosa da Silva, utilizando ferramentas de IA como suporte ao desenvolvimento, mantendo a autoria intelectual e implementação técnica.
